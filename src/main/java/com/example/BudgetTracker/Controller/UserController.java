@@ -4,6 +4,8 @@ import com.example.BudgetTracker.Entity.User;
 import com.example.BudgetTracker.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -18,8 +20,9 @@ public class UserController {
         return userService.register(user);
     }
 
-    @GetMapping
+    @GetMapping("/find")
     public User findByEmail(@RequestParam String email) {
         return userService.findByEmail(email);
     }
+
 }
