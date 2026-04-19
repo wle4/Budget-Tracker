@@ -15,10 +15,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
-    }
+//    @PostMapping("/register")
+//    public User register(@RequestBody User user) {
+//        return userService.register(user);
+//    }
 
     @GetMapping("/find")
     public User findByEmail(@RequestParam String email) {
