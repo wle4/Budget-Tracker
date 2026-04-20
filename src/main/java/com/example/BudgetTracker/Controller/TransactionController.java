@@ -1,5 +1,7 @@
 package com.example.BudgetTracker.Controller;
 
+import com.example.BudgetTracker.DTO.TransactionRequestDTO;
+import com.example.BudgetTracker.DTO.TransactionResponseDTO;
 import com.example.BudgetTracker.Entity.Transaction;
 import com.example.BudgetTracker.Service.TransactionService;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/transactions")
+@RequestMapping("/api/accounts/{accountId}/transactions")
 public class TransactionController {
     private final TransactionService transactionService;
 
@@ -17,12 +19,12 @@ public class TransactionController {
     }
 
     @PostMapping
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return transactionService.createTransaction(transaction);
+    public TransactionResponseDTO createTransaction(@RequestBody TransactionRequestDTO dto, @PathVariable UUID accountId) {
+        return transactionService.createTransaction(dto, accountId);
     }
 
     @GetMapping
-    public List<Transaction> getTransactions(@RequestParam UUID accountId) {
+    public List<TransactionResponseDTO> getTransactions(@PathVariable UUID accountId) {
         return transactionService.getTransactionsByAccountId(accountId);
     }
 

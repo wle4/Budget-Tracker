@@ -1,5 +1,7 @@
 package com.example.BudgetTracker.Controller;
 
+import com.example.BudgetTracker.DTO.UserRequestDTO;
+import com.example.BudgetTracker.DTO.UserResponseDTO;
 import com.example.BudgetTracker.Service.AuthService;
 import com.example.BudgetTracker.Service.UserService;
 import com.example.BudgetTracker.Entity.User;
@@ -18,8 +20,8 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public User register(@RequestBody User user) {
-        return userService.register(user);
+    public UserResponseDTO register(@RequestBody UserRequestDTO dto) {
+        return userService.register(dto);
     }
 
     @PostMapping("/login")

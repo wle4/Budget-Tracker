@@ -1,7 +1,10 @@
 package com.example.BudgetTracker.Controller;
 
+import com.example.BudgetTracker.DTO.CategoryRequestDTO;
+import com.example.BudgetTracker.DTO.CategoryResponseDTO;
 import com.example.BudgetTracker.Entity.Category;
 import com.example.BudgetTracker.Service.CategoryService;
+import com.example.BudgetTracker.Service.JwtService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,19 +14,23 @@ import java.util.UUID;
 @RequestMapping("/api/categories")
 public class CategoryController {
     private final CategoryService categoryService;
+    private final JwtService jwtService;
 
-    public CategoryController(CategoryService categoryService) {
+    public CategoryController(CategoryService categoryService, JwtService jwtService) {
         this.categoryService = categoryService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category) {
-        return categoryService.createCategory(category);
+    public CategoryResponseDTO createCategory(@RequestBody CategoryRequestDTO dto, @RequestHeader("Authorization") String authHeader) {
+        String token = authHeader.substring(7);
+        String email = jwtService.extractEmail(token);
+        return categoryService.createCategory(dto, email);
     }
 
     @GetMapping
-    public List<Category> getCategories(@RequestParam UUID id) {
-        return categoryService.getCategoriesByUserId(id);
+    public List<CategoryResponseDTO> getCategories(@RequestParam UUID userId) {
+        return categoryService.getCategoriesByUserId(userId);
     }
 
     @DeleteMapping("/{id}")
