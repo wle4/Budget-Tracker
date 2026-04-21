@@ -4,8 +4,9 @@ import com.example.BudgetTracker.DTO.UserRequestDTO;
 import com.example.BudgetTracker.DTO.UserResponseDTO;
 import com.example.BudgetTracker.Service.AuthService;
 import com.example.BudgetTracker.Service.UserService;
-import com.example.BudgetTracker.Entity.User;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -20,7 +21,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public UserResponseDTO register(@RequestBody UserRequestDTO dto) {
+    public UserResponseDTO register(@Valid @RequestBody UserRequestDTO dto) {
         return userService.register(dto);
     }
 

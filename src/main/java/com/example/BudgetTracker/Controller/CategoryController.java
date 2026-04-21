@@ -5,6 +5,7 @@ import com.example.BudgetTracker.DTO.CategoryResponseDTO;
 import com.example.BudgetTracker.Entity.Category;
 import com.example.BudgetTracker.Service.CategoryService;
 import com.example.BudgetTracker.Service.JwtService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public CategoryResponseDTO createCategory(@RequestBody CategoryRequestDTO dto, @RequestHeader("Authorization") String authHeader) {
+    public CategoryResponseDTO createCategory(@Valid @RequestBody CategoryRequestDTO dto, @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         String email = jwtService.extractEmail(token);
         return categoryService.createCategory(dto, email);

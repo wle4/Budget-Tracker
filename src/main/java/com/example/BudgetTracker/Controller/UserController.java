@@ -2,6 +2,7 @@ package com.example.BudgetTracker.Controller;
 
 import com.example.BudgetTracker.Entity.User;
 import com.example.BudgetTracker.Service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;

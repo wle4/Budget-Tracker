@@ -4,6 +4,7 @@ import com.example.BudgetTracker.DTO.AccountRequestDTO;
 import com.example.BudgetTracker.DTO.AccountResponseDTO;
 import com.example.BudgetTracker.Service.AccountService;
 import com.example.BudgetTracker.Service.JwtService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class AccountController {
     }
 
     @PostMapping
-    public AccountResponseDTO createAccount(@RequestBody AccountRequestDTO dto,
+    public AccountResponseDTO createAccount(@Valid @RequestBody AccountRequestDTO dto,
                                             @RequestHeader("Authorization") String authHeader) {
         String token = authHeader.substring(7);
         String email = jwt.extractEmail(token);

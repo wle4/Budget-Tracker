@@ -4,6 +4,7 @@ import com.example.BudgetTracker.DTO.TransactionRequestDTO;
 import com.example.BudgetTracker.DTO.TransactionResponseDTO;
 import com.example.BudgetTracker.Entity.Transaction;
 import com.example.BudgetTracker.Service.TransactionService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class TransactionController {
     }
 
     @PostMapping
-    public TransactionResponseDTO createTransaction(@RequestBody TransactionRequestDTO dto, @PathVariable UUID accountId) {
+    public TransactionResponseDTO createTransaction(@Valid @RequestBody TransactionRequestDTO dto, @Valid @PathVariable UUID accountId) {
         return transactionService.createTransaction(dto, accountId);
     }
 
