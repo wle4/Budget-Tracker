@@ -35,8 +35,8 @@ public class AuthControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.email").value("integrationtest@gmail.com"))
-                .andExpect(jsonPath("$.fullName").value("Integration Test"))
+                .andExpect(jsonPath("$.email").value("validemail@gmail.com"))
+                .andExpect(jsonPath("$.fullName").value("ValidEmail Test"))
                 .andExpect(jsonPath("$.password").doesNotExist());
     }
 
